@@ -2,13 +2,19 @@
 
 ## Getting started
 
-Open your terminal app with Node installed, and run:
+1. Open your terminal app
+1. Install [Node.js](https://nodejs.org) (or [Bun](https://bun.sh/), or [Deno](https://deno.com/), or whatever JS runtime you prefer) if it's not there 
+1. Clone this repo with `git`
+1. `cd chat-with-yourself`
+1. Run:
 
-```sh
+```shell
 node chat.js
 ```
 
-You'll need to enter two names for the chatting persons and start the chat. When you want to stop chatting, enter `byebye` and the script will stop execution. The resulting chat text will be saved as a markdown file in the root folder.
+You'll need to enter two names for the chatting persons and start the chat. When you want to stop chatting, enter `byebye` and the script will stop execution. The resulting chat text will be saved as a markdown file in the root folder. (The generated files are gitignored by default.)
+
+Supports different languages (well, some at least), and emojis 🙂
 
 ## Inspiration behind the project
 
