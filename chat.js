@@ -15,8 +15,8 @@ let second_person = '';
 let current_person = '';
 let fileChoosen = '';
 
-rl.question('Continue from previous chat? y/n :', (cont) => {
-	if (cont === "y") {
+rl.question('Continue from previous chat? Y/N :', (cont) => {
+	if (cont === "Y") || (cont === "y) {
 		
 		const files = fs.readdirSync(path.join(__dirname)).filter((filename) => filename.includes(".md") && !filename.includes("README"));
 
