@@ -17,7 +17,8 @@ let fileChoosen = '';
 
 rl.question('Continue from previous chat? Y/N :', (cont) => {
 	if (cont === "Y" || cont === "y) {
-		
+		chatLog.push("  \n");
+	    
 		const files = fs.readdirSync(path.join(__dirname)).filter((filename) => filename.includes(".md") && !filename.includes("README"));
 
 		if (files.length === 0) {console.log("No Files Available")}
