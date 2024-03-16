@@ -13,29 +13,33 @@ const chatLog = [];
 let first_person = '';
 let second_person = '';
 let current_person = '';
-let fileChoosen = '';
+let fileChosen = '';
 
-rl.question('Continue from previous chat? Y/N :', (cont) => {
-	if (cont === "Y" || cont === "y) {
+rl.question('Continue from previous chat? y/N: ', (cont) => {
+	if (cont === "Y" || cont === "y") {
 		chatLog.push("  \n");
-	    
+
 		const files = fs.readdirSync(path.join(__dirname)).filter((filename) => filename.includes(".md") && !filename.includes("README"));
 
-		if (files.length === 0) {console.log("No Files Available")}
-		
-		let iterator = 0;	
+		if (files.length === 0) {
+			console.log("No Files Available");
+			rl.close();
+			return;
+		}
+
+		let iterator = 0;
 		files.forEach((File1) => {
 			console.log(File1, iterator);
 			iterator++;
 		})
-		
+
 		rl.question("Please choose a file, choose by the number next to the file: ", (itera) => {
-			fileChoosen = files[itera];
-			fs.readFile(fileChoosen, 'utf-8',(err, data) => {
+			fileChosen = files[itera];
+			fs.readFile(fileChosen, 'utf-8',(err, data) => {
 				data = data.split("\n");
-				
+
 				if (err) {
-					throw err;	
+					throw err;
 				}
 
 				try {
@@ -47,9 +51,7 @@ rl.question('Continue from previous chat? Y/N :', (cont) => {
 					console.log("Log unfinished, or log is not accessible. The log either has only 1 persons input or it has been most likely corrupted.")
 					rl.close();
 				}
-			
 			});
-			
 		});
 
 	} else {
@@ -61,7 +63,6 @@ rl.question('Continue from previous chat? Y/N :', (cont) => {
 				chat();
 			});
 		});
-
 	}
 });
 
@@ -69,9 +70,9 @@ function chatCont() {
 	rl.question(`${current_person}: `, (message) => {
 		if (message === "byebye") {
 			const data = chatLog.join("");
-			fs.appendFileSync(fileChoosen, data);
-			console.log(`wrote to file ${fileChoosen}`);
-			rl.close()	
+			fs.appendFileSync(fileChosen, data);
+			console.log(`wrote to file ${fileChosen}`);
+			rl.close()
 
 		} else {
 			chatLog.push(`**${current_person}**: ${message}`);
@@ -99,7 +100,7 @@ function chat() {
             rl.close();
         } else {
             chatLog.push(`**${current_person}**: ${message}`);
-           	chatLog.push("  \n"); 
+           	chatLog.push("  \n");
 			current_person = current_person === first_person ? second_person : first_person;
             chat();
         }
